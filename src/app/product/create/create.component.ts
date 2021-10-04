@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
+import { AddProduct } from 'src/app/reducers/product.action';
 import { Product } from 'src/app/reducers/product.model';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-create',
@@ -13,11 +15,12 @@ import { Product } from 'src/app/reducers/product.model';
 })
 export class CreateComponent implements OnInit {
 
+  products$ = this.store.select('product');
+
   constructor(private store : Store<AppState>, private fb : FormBuilder, private _router : Router,
-    private _route : ActivatedRoute) {
-      this.products = this.store.select(state => state.product);
+    private _route : ActivatedRoute, private _dataService : DataService) {
+      // this.products = this.store.select(state => state.product);
     }
-  products : Observable<Product[]>
   createForm : FormGroup = this.fb.group({});
   dataId : string = '';
 
@@ -44,6 +47,13 @@ export class CreateComponent implements OnInit {
   }
   get price(){
     return this.createForm.controls.price;
+  }
+
+  addProduct1(values : Product){
+    this.store.dispatch(AddProduct({product : values}));
+    // this._dataService.addProduct(values).subscribe(res =>{
+    //   console.log(res)
+    // })
   }
 
   addProduct(values : Product) {

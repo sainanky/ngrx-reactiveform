@@ -1,4 +1,4 @@
-import { Action, createAction } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 import { Product } from '../reducers/product.model';
 
 export enum ActionTypes {
@@ -6,28 +6,10 @@ export enum ActionTypes {
     Update = 'UPDATE_PRODUCT',
     Remove = 'DELETE_PRODUCT',
     LoadItems = '[Products] Load items from server',
-    LoadSuccess = '[Products] Load success'
+    LoadSuccess = '[Products] Load success',
+    AddSuccess = '[Products] Add success',
 }
 
 export const GetNewItems = createAction(ActionTypes.LoadItems);
 
-export class AddProduct implements Action {
-    readonly type = ActionTypes.Add;
-    constructor(public payload: Product) {}
-}
-
-export class GetItems implements Action {
-    readonly type = ActionTypes.LoadItems;
-}
-
-export class RemoveProduct implements Action {
-    readonly type = ActionTypes.Remove;
-    constructor(public payload: Product) {}
-}
-
-export class LoadItems implements Action {
-    readonly type = ActionTypes.LoadSuccess;
-    constructor(public payload: Product[]) {}
-}
-
-export type ActionsUnion = AddProduct | RemoveProduct | LoadItems | GetItems;
+export const AddProduct = createAction(ActionTypes.Add, props<{ product: Product }>());

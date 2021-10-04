@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import { Product } from '../reducers/product.model';
-import { GetItems } from '../reducers/product.action';
 
 @Component({
   selector: 'app-product',

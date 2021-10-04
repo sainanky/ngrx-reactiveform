@@ -12,10 +12,25 @@ export class ShopEffects {
     this.actions$.pipe(
       ofType(ActionTypes.LoadItems),
       exhaustMap(() => 
-        this.fruitsService.getAll().pipe(
-          map(fruits => {
-            console.log("called", fruits)
-            return { type: ActionTypes.LoadSuccess, payload: fruits };
+        this._dataService.getAll().pipe(
+          map(res => {
+            console.log("called", res)
+            return { type: ActionTypes.LoadSuccess, payload: res };
+          }),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
+
+  addProduct$ = createEffect(() => 
+    this.actions$.pipe(
+      ofType(ActionTypes.Add),
+      exhaustMap((action : any) => 
+        this._dataService.addProduct(action.product).pipe(
+          map(res => {
+            console.log("called action", action)
+            return { type: ActionTypes.AddSuccess, payload: res };
           }),
           catchError(() => EMPTY)
         )
@@ -23,21 +38,8 @@ export class ShopEffects {
     )
   )
 
-  loadFruits$ = this.actions$.pipe(
-    ofType(ActionTypes.LoadItems),
-    mergeMap(() =>
-      this.fruitsService.getAll().pipe(
-        map(fruits => {
-          console.log("called", fruits)
-          return { type: ActionTypes.LoadSuccess, payload: fruits };
-        }),
-        catchError(() => EMPTY)
-      )
-    )
-  );
-
   constructor(
     private actions$: Actions,
-    private fruitsService: DataService
+    private _dataService: DataService
   ) {}
 }
