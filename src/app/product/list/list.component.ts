@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { Product } from '../product.model';
+import { GetItems } from 'src/app/reducers/product.action';
+import { Product } from 'src/app/reducers/product.model';
 
 @Component({
   selector: 'app-list',
@@ -17,6 +18,8 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("dispatch")
+    this.store.dispatch(new GetItems());
   }
 
   delete(index : number){

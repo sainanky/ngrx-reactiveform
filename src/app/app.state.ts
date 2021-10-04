@@ -1,4 +1,4 @@
-import { Product } from './product/product.model';
+import { Product } from "./reducers/product.model";
 
 export interface AppState {
   readonly product: Product[];

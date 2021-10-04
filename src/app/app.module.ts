@@ -8,6 +8,10 @@ import { ProductComponent } from './product/product.component';
 import { ProductModule } from './product/product.module';
 import { addProductReducer } from './reducers/product.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
+import { ShopEffects } from './reducers/product.effect';
+import { DataService } from './services/data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes : Routes = [
   {
@@ -27,9 +31,10 @@ const routes : Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes), StoreModule.forRoot({product : addProductReducer}), BrowserAnimationsModule
+    RouterModule.forRoot(routes), StoreModule.forRoot({product : addProductReducer}), 
+    BrowserAnimationsModule, EffectsModule.forRoot([ShopEffects]), HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

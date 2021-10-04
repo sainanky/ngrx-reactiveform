@@ -1,17 +1,22 @@
-import { Product } from './../product/product.model';
 import { Action } from '@ngrx/store';
-
+import { Product } from './product.model';
+import { ActionTypes } from '../reducers/product.action';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 
 export function addProductReducer(state: Product[] = [], action : any) {
   switch (action.type) {
-    case 'ADD_PRODUCT':
+    case ActionTypes.LoadSuccess:
+        return {
+          ...state,
+          items: [...action.payload]
+        };
+    case ActionTypes.Add:
         return [...state, action.payload];
-    case 'UPDATE_PRODUCT':
+    case ActionTypes.Update:
         let uData = [...state];
         uData[action.id] = action.payload;
         return uData;
-    case 'DELETE_PRODUCT':
+    case ActionTypes.Remove:
         let nData = [...state];
         nData.splice(action.index, 1);
         return nData;

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { Product } from '../product.model';
+import { Product } from 'src/app/reducers/product.model';
 
 @Component({
   selector: 'app-create',
