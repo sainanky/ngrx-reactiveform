@@ -18,4 +18,16 @@ export class DataService {
   addProduct(body : Product){
     return this._http.post(this.url, body);
   }
+
+  updateProduct(body : Product, id : string){
+    return this._http.put(this.url + '/' + id, body);
+  }
+
+  deleteProduct(id : string){
+    return this._http.delete(this.url + '/' + id);
+  }
+
+  getProductById(id : string){
+    return this._http.get(this.url + '/' + id);
+  }
 }

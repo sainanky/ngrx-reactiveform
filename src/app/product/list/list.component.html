@@ -24,8 +24,8 @@
                     <td>{{item.price}}</td>
                     <td>{{item.description ? item.description : 'NA'}}</td>
                     <td>
-                        <i class="zmdi zmdi-edit" routerLink="/product/create" [queryParams]="{ id : i}"></i>
-                        <i class="zmdi zmdi-delete ml-2" (click)="delete(i)"></i>
+                        <i class="zmdi zmdi-edit" routerLink="/product/create" [queryParams]="{ id : item.id}"></i>
+                        <i class="zmdi zmdi-delete ml-2" (click)="delete(item.id)"></i>
                     </td>
                 </tr>
             </tbody>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { GetNewItems } from 'src/app/reducers/product.action';
+import { DeleteProduct, GetNewItems } from 'src/app/reducers/product.action';
 import { Product } from 'src/app/reducers/product.model';
 
 @Component({
@@ -12,22 +12,17 @@ import { Product } from 'src/app/reducers/product.model';
 })
 export class ListComponent implements OnInit {
 
-  // products : Observable<Product[]>;
   products$ = this.store.select('product');
   constructor(private store : Store<AppState>) { 
     this.store.dispatch(GetNewItems());
   }
 
   ngOnInit(): void {
-    console.log("dispatch")
+    
   }
 
-  delete(index : number){
-    let res = this.store.dispatch({
-      type: 'DELETE_PRODUCT',
-      index : index
-    });
-    alert(`deleted successfully`);
+  delete(id : string){
+    this.store.dispatch(DeleteProduct({id : id}))
   }
 
 }

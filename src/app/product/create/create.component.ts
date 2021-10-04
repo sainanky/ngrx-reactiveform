@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { AddProduct } from 'src/app/reducers/product.action';
+import { AddProduct, UpdateProduct } from 'src/app/reducers/product.action';
 import { Product } from 'src/app/reducers/product.model';
 import { DataService } from 'src/app/services/data.service';
 
@@ -49,43 +49,25 @@ export class CreateComponent implements OnInit {
     return this.createForm.controls.price;
   }
 
-  addProduct1(values : Product){
-    this.store.dispatch(AddProduct({product : values}));
-    // this._dataService.addProduct(values).subscribe(res =>{
-    //   console.log(res)
-    // })
-  }
-
   addProduct(values : Product) {
-    this.store.dispatch({
-      type: 'ADD_PRODUCT',
-      payload: <Product> {
-       ...values
-      }
-    });
+    this.store.dispatch(AddProduct({product : values}));
     this._router.navigateByUrl('/product/list');
-    alert(`created successfully`);
+    // alert(`created successfully`);
   }
 
   updateProduct(values : Product) {
-    this.store.dispatch({
-      type: 'UPDATE_PRODUCT',
-      id : this.dataId,
-      payload: <Product> {
-       ...values
-      }
-    });
-    this._router.navigateByUrl('/product/list');
-    alert(`updated successfully`);
+    this.store.dispatch(UpdateProduct({product : values, id : this.dataId}));
+    // this._router.navigateByUrl('/product/list');
+    // alert(`updated successfully`);
   }
 
   getProductDetails(dataId : string){
-    this.store.select(state => state.product).subscribe((res : Product[])=>{
-      let data : Product = res[Number(dataId)];
+    this._dataService.getProductById(this.dataId).subscribe(res =>{
+      let data : any = res;
       this.createForm.controls.code.setValue(data.code);
       this.createForm.controls.name.setValue(data.name);
       this.createForm.controls.price.setValue(data.price);
       this.createForm.controls.description.setValue(data.description);
-    });
+    })
   }
 }
