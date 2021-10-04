@@ -1,0 +1,59 @@
+<div class="col-12 text-right">
+    <button type="button" class="btn btn-dark" routerLink="/product/list">Back To List</button>
+</div>
+<div class="col-12">
+    <form [formGroup]="createForm" class="container">
+        <div class="row">
+            <div class="col-5">
+                <div class="row">
+                    <label class="control-label">Product Code *</label>
+                </div>
+                <div class="row">
+                    <input type="text" formControlName="code" class="form-control" placeholder="Enter Product Code">
+                    <div class="help-info" *ngIf="code.touched && code.invalid">
+                        <span class="error" *ngIf="code?.errors?.required">Please enter product code</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 offset-1">
+                <div class="row">
+                    <label class="control-label">Product Name *</label>
+                </div>
+                <div class="row">
+                    <input type="text" formControlName="name" class="form-control" placeholder="Enter Product Name">
+                    <div class="help-info" *ngIf="name.touched && name.invalid">
+                        <span class="error" *ngIf="name?.errors?.required">Please enter product name</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-5">
+                <div class="row">
+                    <label class="control-label">Product Price *</label>
+                </div>
+                <div class="row">
+                    <input type="number" formControlName="price" class="form-control" placeholder="Enter Product Price">
+                    <div class="help-info" *ngIf="price.touched && price.invalid">
+                        <span class="error" *ngIf="price?.errors?.required">Please enter product price</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 offset-1">
+                <div class="row">
+                    <label class="control-label">Product Description</label>
+                </div>
+                <div class="row">
+                    <textarea class="form-control" formControlName="description" placeholder="Enter Product Description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" *ngIf="!dataId" [disabled]="!createForm.valid" (click)="addProduct(createForm.value)">Submit</button>
+                <button class="btn btn-primary" *ngIf="dataId" [disabled]="!createForm.valid" (click)="updateProduct(createForm.value)">Update</button>
+                <button class="btn btn-dark ml-2">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
