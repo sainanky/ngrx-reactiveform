@@ -6,10 +6,7 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export function addProductReducer(state: Product[] = [], action : any) {
   switch (action.type) {
     case ActionTypes.LoadSuccess:
-        return {
-          ...state,
-          items: [...action.payload]
-        };
+        return [...action.payload]
     case ActionTypes.Add:
         return [...state, action.payload];
     case ActionTypes.Update:

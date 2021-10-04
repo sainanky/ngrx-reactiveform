@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction } from '@ngrx/store';
 import { Product } from '../reducers/product.model';
 
 export enum ActionTypes {
@@ -8,6 +8,8 @@ export enum ActionTypes {
     LoadItems = '[Products] Load items from server',
     LoadSuccess = '[Products] Load success'
 }
+
+export const GetNewItems = createAction(ActionTypes.LoadItems);
 
 export class AddProduct implements Action {
     readonly type = ActionTypes.Add;

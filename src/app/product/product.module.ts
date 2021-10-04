@@ -8,6 +8,8 @@ import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { LayoutModule } from '../layout/layout.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { ShopEffects } from '../reducers/product.effect';
 
 const routes : Routes = [
   {
@@ -34,7 +36,8 @@ const routes : Routes = [
 @NgModule({
   declarations: [ProductComponent, ListComponent, CreateComponent],
   imports: [
-    CommonModule, RouterModule.forChild(routes), LayoutModule, FormsModule, ReactiveFormsModule
+    CommonModule, RouterModule.forChild(routes), LayoutModule, FormsModule, ReactiveFormsModule,
+    // EffectsModule.forFeature([ShopEffects])
   ]
 })
 export class ProductModule { }

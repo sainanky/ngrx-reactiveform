@@ -31,8 +31,9 @@ const routes : Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes), StoreModule.forRoot({product : addProductReducer}), 
-    BrowserAnimationsModule, EffectsModule.forRoot([ShopEffects]), HttpClientModule
+    RouterModule.forRoot(routes), 
+    BrowserAnimationsModule, HttpClientModule,
+    StoreModule.forRoot({product : addProductReducer}), EffectsModule.forRoot([ShopEffects])
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

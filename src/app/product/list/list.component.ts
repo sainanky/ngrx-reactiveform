@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { GetItems } from 'src/app/reducers/product.action';
+import { GetItems, GetNewItems } from 'src/app/reducers/product.action';
 import { Product } from 'src/app/reducers/product.model';
 
 @Component({
@@ -12,14 +12,15 @@ import { Product } from 'src/app/reducers/product.model';
 })
 export class ListComponent implements OnInit {
 
-  products : Observable<Product[]>;
+  // products : Observable<Product[]>;
+  products$ = this.store.select('product');
   constructor(private store : Store<AppState>) { 
-    this.products = this.store.select(state => state.product);
+    // this.products = this.store.select(state => state.product);
+    this.store.dispatch(GetNewItems());
   }
 
   ngOnInit(): void {
     console.log("dispatch")
-    this.store.dispatch(new GetItems());
   }
 
   delete(index : number){

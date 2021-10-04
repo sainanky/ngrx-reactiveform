@@ -10,6 +10,6 @@ export class DataService {
   constructor(private _http : HttpClient) { }
 
   getAll() {
-    return this._http.get('/assets/data.json');
+    return this._http.get('http://localhost:3000/data');
   }
 }
